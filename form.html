@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Login & Registration Form</title>
+    <style>
+        /* BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+    
+        body {
+            background-color: var(--body-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+    
+        nav#header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 5px 10px var(--first-shadow-color);
+            z-index: 1000;
+        }
+    
+        /* Adjust container size for login */
+        .container {
+            width: 100%;
+            max-width: 300px; /* Lebar form login tetap kecil */
+            background-color: var(--color-white);
+            padding: 15px; /* Kurangi padding agar lebih pendek */
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--first-shadow-color);
+            margin-bottom: 20px;
+        }
+    
+        h2 {
+            text-align: center;
+            color: var(--text-color-second);
+            margin-bottom: 10px; /* Kurangi margin bawah pada judul */
+        }
+    
+        label {
+            color: var(--text-color-second);
+            font-weight: 500;
+            margin-bottom: 5px; /* Kurangi margin label */
+        }
+    
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px; /* Kurangi padding dalam input */
+            margin: 5px 0; /* Kurangi margin antara input */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    
+        .btn {
+            font-weight: 500;
+            padding: 10px; /* Kurangi padding tombol */
+            background: var(--third-color);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.4s;
+            color: var(--color-white);
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+    
+        .btn:hover {
+            background: var(--second-color);
+            color: var(--color-white);
+        }
+    
+        /* Tabs for login and registration */
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px; /* Kurangi margin antara tab dan form */
+        }
+    
+        .tab {
+            padding: 8px; /* Kurangi padding dalam tab */
+            background-color: var(--first-color-hover);
+            color: var(--text-color-second);
+            cursor: pointer;
+            text-align: center;
+            width: 48%;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+    
+        .tab.active {
+            background-color: var(--first-color);
+            color: var(--color-white);
+        }
+    
+        .form-container {
+            display: none;
+        }
+    
+        .form-container.active {
+            display: block;
+        }
+    
+        .toggle-link {
+            margin-top: 10px; /* Kurangi margin pada link toggle */
+            text-align: center;
+        }
+    
+        .toggle-link a {
+            color: var(--first-color);
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+    
+        /* Scrollable tutorial box */
+        .scrollable-box {
+            max-height: 400px; /* Tetap besar untuk tutorial */
+            overflow-y: scroll;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: var(--color-white);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+        }
+    
+        .scrollable-box h2 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    
+        .scrollable-box p {
+            margin-bottom: 15px;
+        }
+    </style>    
+</head>
+<body>
+     <!-- --------------- HEADER --------------- -->
+     <nav id="header">
+        <div class="nav-logo">
+          <p class="nav-name">Tutorial</p>
+          <span>.</span>
+        </div>
+        <div class="nav-menu" id="myNavMenu">
+          <ul class="nav_menu_list">
+            <li class="nav_list">
+              <a href="#home" class="nav-link">Home</a>
+              <div class="circle"></div>
+            </li>
+            <li class="nav_list">
+              <a href="#about" class="nav-link">About</a>
+              <div class="circle"></div>
+            </li>
+            <li class="nav_list">
+              <a href="#projects" class="nav-link">Projects</a>
+              <div class="circle"></div>
+            </li>
+            <li class="nav_list">
+              <a href="tutorial.html" class="nav-link active-link">Tutorial</a>
+              <div class="circle"></div>
+            </li>
+            <li class="nav_list">
+              <a href="#contact" class="nav-link">Contact</a>
+              <div class="circle"></div>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-button">
+          <a href="assets/CV_Nassa Fadilla.pdf" download="CV_Nassa Fadilla.pdf" class="btn">
+            Download CV <i class="uil uil-file-alt"></i>
+          </button>
+          </a>
+        </div>
+        <div class="nav-menu-btn">
+          <i class="uil uil-bars" onclick="myMenuFunction()"></i>
+        </div>
+      </nav>
+      <br></br>
+      
+    <div class="container">
+        <!-- Tab container for toggling between Login and Register forms -->
+        <div class="tab-container">
+            <div class="tab active" id="login-tab">Login</div>
+            <div class="tab" id="register-tab">Register</div>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-container active" id="login-form">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" class="btn" value="Login">
+            </form>
+            <div class="toggle-link">
+                <p>Belum punya akun? <a id="toRegister">Register</a></p>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-container" id="register-form">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="username">Username:</label>
+                <input type="text" id="reg-username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="reg-password" name="password" required>
+                <input type="submit" class="btn" value="Register">
+            </form>
+            <div class="toggle-link">
+                <p>Sudah punya akun? <a id="toLogin">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrollable box for tutorial -->
+    <div class="scrollable-box">
+        <h2>Tutorial Membuat Login & Registration Form</h2>
+        <p>1. Pertama, buatlah struktur HTML dasar dengan elemen-elemen seperti "< form >", "< input>", dan "< button >" untuk form login dan registrasi. Setiap form harus memiliki method dan action yang sesuai.</p>
+        <p>2. Gunakan CSS untuk mengatur tampilan form, termasuk ukuran, warna, dan posisi. Gunakan properti seperti `display: flex`, `justify-content: center`, dan `align-items: center` untuk memposisikan form di tengah halaman.</p>
+        <p>3. Untuk membuat tab login dan registrasi, gunakan dua tombol atau div yang mewakili tab tersebut, lalu tambahkan event listener JavaScript untuk mengatur ketika salah satu tab diklik.</p>
+        <p>4. Dengan JavaScript, Anda dapat menambahkan fungsionalitas pergantian antar form menggunakan class `.active` yang diterapkan pada elemen form yang sesuai.</p>
+        <p>5. Pada tahap validasi, pastikan form memiliki atribut `required` untuk input yang wajib diisi dan gunakan JavaScript untuk validasi tambahan seperti memeriksa apakah password sudah benar.</p>
+        <p>6. Gunakan event listener pada form `submit` untuk mencegah perilaku default form dan melakukan pengecekan apakah data yang dimasukkan sudah sesuai.</p>
+        <p>7. Setelah validasi berhasil, Anda dapat mengarahkan pengguna ke halaman berikutnya dengan `window.location.href` atau menyimpan data ke dalam database tergantung pada tujuan aplikasi Anda.</p>
+        <p>8. Tambahkan fitur tambahan seperti menampilkan pesan kesalahan jika login gagal atau registrasi berhasil, dan buat animasi transisi antar form untuk pengalaman pengguna yang lebih baik.</p>
+    </div>
+
+    <script>
+        // Script to toggle between login and register forms
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const toRegister = document.getElementById('toRegister');
+        const toLogin = document.getElementById('toLogin');
+
+        let registeredUsername = "";
+        let registeredPassword = "";
+
+        loginTab.addEventListener('click', () => {
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+        });
+
+        // Toggle links
+        toRegister.addEventListener('click', () => {
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+        });
+
+        toLogin.addEventListener('click', () => {
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+        });
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check if login matches the registered credentials
+            if (username === registeredUsername && password === registeredPassword) {
+                alert('Login berhasil');
+                window.location.href = 'index.html'; // Redirect to index.html after successful login
+            } else {
+                alert('Password atau username salah');
+            }
+        });
+
+        // Handle register form submission
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+
+            // Mock registration validation
+            if (email && username && password) {
+                alert('Registrasi berhasil');
+                
+                // Save registered credentials
+                registeredUsername = username;
+                registeredPassword = password;
+                
+                // Automatically fill login form
+                document.getElementById('username').value = registeredUsername;
+                document.getElementById('password').value = registeredPassword;
+                
+                // Switch to login form
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+            } else {
+                alert('Mohon isi semua field');
+            }
+        });
+    </script>
+
+</body>
+</html>
