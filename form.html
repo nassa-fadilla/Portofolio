@@ -34,32 +34,32 @@
 
         .container {
             width: 100%;
-            max-width: 600px; /* Adjusted width for the tutorial */
+            max-width: 1000px;
             background-color: var(--color-white);
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 15px var(--first-shadow-color);
             margin-top: 80px;
+            position: relative;
         }
 
         h2 {
             text-align: center;
             color: var(--text-color-second);
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Jarak antara header dan konten berikutnya */
         }
 
-        /* Scrollable tutorial box */
         .scrollable-box {
-        max-height: 400px; /* Kept large for tutorial content */
-        overflow-y: scroll;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background-color: var(--color-white);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 100%; /* Full width */
-        margin-top: 20px;
-}
+            max-height: 400px;
+            overflow-y: scroll;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: var(--color-white);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 20px;
+        }
 
         /* Button Style */
         .back-button {
@@ -75,26 +75,21 @@
             text-decoration: none;
             font-weight: 500;
             transition: background 0.3s;
-            position: fixed;
-            top: 50px;
+            position: fixed; /* Mengubah menjadi fixed */
+            top: 50px; /* Menempatkan button di bawah navbar */
             right: 135px;
-            z-index: 1100;
+            z-index: 1100; /* Memberikan z-index lebih tinggi dari navbar */
         }
 
         .back-button:hover {
             background: var(--second-color);
         }
 
-        .editor {
-            width: 100%;
-            border: 1px solid #ccc;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-family: monospace;
-            height: 400px; /* Increased height for better visibility */
+        .arrow-icon {
+            margin-right: 5px;
         }
 
+        /* Custom button for run and undo */
         .run-button, .undo-button {
             padding: 8px;
             border-radius: 5px;
@@ -104,11 +99,21 @@
             color: var(--color-white);
             font-weight: 600;
             transition: background 0.3s;
-            border: none;
+            border: none; /* Menghilangkan border hitam */
         }
 
         .run-button:hover, .undo-button:hover {
             background-color: var(--second-color);
+        }
+
+        .editor {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            height: 200px;
         }
 
     /* Preview box */
@@ -134,7 +139,7 @@
                 <span>.</span>
             </div>
         </nav>
-        <br><br><br>
+        <br></br><br></br><br></br>
 
         <main>
             <section id="tutorials">
@@ -155,7 +160,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Registration Form</title>
     <style>
-        /* BASE */
+/* BASE */
 * {
     margin: 0;
     padding: 0;
@@ -164,7 +169,7 @@
 }
 
 body {
-    background-color: var(--body-color); /* Updated to use CSS variables */
+    background-color: var(--body-color); /* Background color */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -177,60 +182,61 @@ nav#header {
     top: 0;
     left: 0;
     width: 100%;
-    box-shadow: 0 5px 10px var(--first-shadow-color); /* Using variables for shadows */
+    box-shadow: 0 5px 10px var(--first-shadow-color); /* Shadow color */
     z-index: 1000;
 }
 
-/* Adjust container size for login */
+/* Adjust container size for login and registration */
 .container {
     width: 100%;
-    max-width: 300px; /* Same small width for the form */
-    background-color: var(--color-white); /* Updated to use variable */
-    padding: 15px; /* Adjust padding to fit the content better */
+    max-width: 1000px; /* Same as tutorial box */
+    background-color: var(--color-white);
+    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 15px var(--first-shadow-color); /* Using variable for shadow color */
-    margin-bottom: 20px;
+    box-shadow: 0 0 15px var(--first-shadow-color);
+    margin-top: 80px;
+    position: relative;
 }
 
 h2 {
     text-align: center;
-    color: var(--text-color-second); /* Use second text color */
-    margin-bottom: 10px; /* Reduced bottom margin */
+    color: var(--text-color-second); /* Secondary text color */
+    margin-bottom: 20px; /* Spacing below the title */
 }
 
 label {
-    color: var(--text-color-second); /* Use second text color for labels */
+    color: var(--text-color-second);
     font-weight: 500;
-    margin-bottom: 5px; /* Reduced margin to keep the form tight */
+    margin-bottom: 5px;
 }
 
-input[type="text"], 
-input[type="password"], 
+input[type="text"],
+input[type="password"],
 input[type="email"] {
     width: 100%;
-    padding: 8px; /* Reduced padding inside input fields */
-    margin: 5px 0; /* Reduced margin between fields */
+    padding: 8px;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 .btn {
     font-weight: 500;
-    padding: 10px; /* Reduced padding on the button */
-    background: var(--third-color); /* Button color from variable */
+    padding: 10px;
+    background: var(--third-color); /* Button background */
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.4s;
-    color: var(--color-white); /* White color for the text */
+    color: var(--color-white); /* White text color */
     width: 100%;
     text-align: center;
     margin-top: 10px;
 }
 
 .btn:hover {
-    background: var(--second-color); /* Hover effect from variable */
-    color: var(--color-white); /* Maintain white text on hover */
+    background: var(--second-color); /* Hover background color */
+    color: var(--color-white);
 }
 
 /* Tabs for login and registration */
@@ -241,8 +247,8 @@ input[type="email"] {
 }
 
 .tab {
-    padding: 8px; /* Reduced padding inside the tab */
-    background-color: var(--first-color-hover); /* Hover background from variable */
+    padding: 8px;
+    background-color: var(--first-color-hover); /* Hover background */
     color: var(--text-color-second); /* Text color for inactive tabs */
     cursor: pointer;
     text-align: center;
@@ -252,8 +258,8 @@ input[type="email"] {
 }
 
 .tab.active {
-    background-color: var(--first-color); /* Active tab background color */
-    color: var(--color-white); /* White text color for active tab */
+    background-color: var(--first-color); /* Active tab background */
+    color: var(--color-white); /* White text for active tab */
 }
 
 .form-container {
@@ -265,41 +271,52 @@ input[type="email"] {
 }
 
 .toggle-link {
-    margin-top: 10px; /* Reduced margin on the toggle link */
+    margin-top: 10px;
     text-align: center;
 }
 
 .toggle-link a {
-    color: var(--first-color); /* Link color from variable */
+    color: var(--first-color); /* Link color */
     cursor: pointer;
     text-decoration: none;
     font-weight: 500;
 }
 
 .toggle-link a:hover {
-    text-decoration: underline; /* Underline effect on hover */
+    text-decoration: underline; /* Underline effect */
 }
 
 /* Scrollable tutorial box */
 .scrollable-box {
-    max-height: 400px; /* Kept large for tutorial content */
+    max-height: 400px;
     overflow-y: scroll;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: var(--color-white);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Full width */
+    width: 100%;
     margin-top: 20px;
 }
 
 .scrollable-box h2 {
-    margin-bottom: 10px; /* Reduced margin for the tutorial header */
+    margin-bottom: 10px;
     text-align: center;
 }
 
 .scrollable-box p {
-    margin-bottom: 15px; /* Reduced margin between paragraphs */
+    margin-bottom: 15px;
+}
+
+/* Ensure form container width matches the tutorial box */
+.form-container {
+    width: 100%;
+    max-width: 1000px; /* Same max-width as the tutorial box */
+    background-color: var(--color-white);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--first-shadow-color);
+    margin-top: 20px;
 }
     </style>
 </head>
