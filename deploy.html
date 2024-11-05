@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Tutorial Deploy Web ke GitHub</title>
+    <style>
+        /* BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: var(--body-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        nav#header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 5px 10px var(--first-shadow-color);
+            z-index: 1000;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--color-white);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--first-shadow-color);
+            margin-top: 80px;
+            position: relative;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--text-color-second);
+            margin-bottom: 20px;
+        }
+
+        .scrollable-box {
+            max-height: 400px;
+            overflow-y: scroll;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: var(--color-white);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--third-color);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            position: fixed; /* Mengubah menjadi fixed */
+            top: 50px; /* Menempatkan button di bawah navbar */
+            right: 135px;
+            z-index: 1100; /* Memberikan z-index lebih tinggi dari navbar */
+        }
+
+        .back-button:hover {
+            background: var(--second-color);
+        }
+
+        .arrow-icon {
+            margin-right: 5px;
+        }
+
+        .editor {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Tombol Kembali ke Menu Tutorial -->
+    <a href="tutorial.html" class="back-button">
+        <span class="arrow-icon">&#8592;</span>Back</a>
+
+    <div class="container">
+        <nav id="header">
+            <div class="nav-logo">
+                <p class="nav-name">Deploy Tutorial</p>
+                <span>.</span>
+            </div>
+        </nav>
+        <br><br><br>
+
+        <main>
+            <section id="tutorials">
+                <div class="top-header">
+                    <h1>Tutorial: Deploy Website to GitHub</h1>
+                </div>
+                <div class="tutorial-box scrollable-box">
+                    <h2>Tutorial Deploy Web ke GitHub</h2>
+                    <p> Tutorial ini bertujuan untuk membantu Anda memahami cara mengunggah project ke GitHub.
+                        Langkah-langkah ini mencakup pembuatan repositori baru, mengunggah file project,
+                        serta mengaktifkan GitHub Pages agar project dapat diakses secara online.</p>
+                    <br>
+                    <h3>Langkah-Langkah:</h3>
+                    <ul>
+                        1. Pastikan bahwa anda telah memiliki akun github. <br>
+                        2. Buat "New Repositori" dengan memasukan "nama" repository dan "public" repository. <br>
+                        3. Klik button "Create Repository" dan dapatkan "Code inisialisasi Git" untuk deploy web anda ke github. <br>
+                        4. Masukkan "Code Git" satu persatu pada terminal project anda, pastikan bahwa semua tahap berhasil tanpa eror/fatal. <br>
+                        5. Ketika semua "Code Git" berhasil di-konfigurasi pada project anda, kembali lagi ke GitHub. <br>
+                        6. Pastikan bahwa project anda telah ter-unggah pada repository github anda. <br>
+                        7. Untuk mendapatkan URL live project, masuk ke menu setting pada GitHub. <br>
+                        8. Masuk ke menu "Pages", pilih "Branch: main" dan klik "Save". <br>
+                        9. Tunggu hingga proses deploy selesai, cek secara berkala pada setting -> pages. <br>
+                        10. Setelah proses deploy setelai, dapatkan URL live Project anda pada Github Pages. <br>
+                    </ul>
+                    <br>
+                    <h3>Code inisialisasi Git:</h3>
+                    <ul>
+                        1. git init <br>
+                        2. git add . <br>
+                        3. git commit -m "first commit" <br>
+                        4. git branch -M main <br>
+                        5. git remote add origin https://github.com/"namaakungithub"/"namarepository".git <br>
+                        6. git push -u origin main <br>
+                    </ul> 
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

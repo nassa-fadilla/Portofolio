@@ -1,151 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Geolocation API</title>
-    <style>
-      /* Body styling */
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #eaeaea;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>Tutorial Geolocation API</title>
 
-      /* Container for content */
-      .container {
-        text-align: center;
-        background-color: #ffffff;
-        border-radius: 15px;
-        padding: 40px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        max-width: 500px;
-        width: 100%;
-      }
+  <style>
+    /* BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-      h1 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 20px;
-      }
+    body {
+      background-color: var(--body-color); /* Use the same body color variable */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
 
-      /* Stylish button */
-      button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
+    nav#header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      box-shadow: 0 5px 10px var(--first-shadow-color);
+      z-index: 1000;
+    }
 
-      button:hover {
-        background-color: #0056b3;
-      }
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      background-color: var(--color-white);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px var(--first-shadow-color);
+      margin-top: 80px;
+      position: relative;
+    }
 
-      /* Location result box */
-      #location {
-        margin-top: 20px;
-        padding: 20px;
-        border-radius: 15px;
-        background-color: #e9f7f9;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        display: none;
-      }
+    h2 {
+      text-align: center;
+      color: var(--text-color-second);
+      margin-bottom: 20px;
+    }
 
-      h3 {
-        margin-bottom: 10px;
-        font-size: 20px;
-        color: #007bff;
-      }
+    .scrollable-box {
+      max-height: 400px;
+      overflow-y: scroll;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: var(--color-white);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      margin-top: 20px;
+    }
 
-      p {
-        font-size: 16px;
-        color: #555;
-        margin: 5px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Get User Location with Geolocation API</h1>
-      <button onclick="getLocation()">Get Location</button>
+    textarea.editor {
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 8px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-family: monospace;
+      height: 200px;
+    }
 
-      <div id="location">
-        <h3>Your Location:</h3>
-        <p>Latitude: <span id="latitude"></span></p>
-        <p>Longitude: <span id="longitude"></span></p>
-        <p>Accuracy: <span id="accuracy"></span> meters</p>
+    .run-button, .undo-button {
+      padding: 8px;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: var(--third-color);
+      color: var(--color-white);
+      font-weight: 600;
+      transition: background 0.3s;
+      border: none;
+    }
+
+    .run-button:hover, .undo-button:hover {
+      background-color: var(--second-color);
+    }
+
+    .preview {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: var(--color-white);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Back Button Style */
+    .back-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--third-color);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--color-white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+      position: fixed;
+      top: 50px;
+      right: 135px;
+      z-index: 1100;
+    }
+
+    .back-button:hover {
+      background: var(--second-color);
+    }
+
+    .arrow-icon {
+      margin-right: 5px;
+    }
+
+    .container_loc {
+      text-align: center;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: #FFB4B4;
+      margin-top: 20px;
+    }
+    h1 { font-size: 24px; color: #333; margin-bottom: 20px; }
+    button {
+      background-color: #ccc;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover { background-color: #FF9292; }
+    #location {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: #FAF1E4;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      display: none;
+    }
+    h3 { margin-bottom: 10px; font-size: 20px; color: #435334; }
+    p { font-size: 16px; color: #8c8c8c; margin: 5px 0; }
+  </style>
+</head>
+
+<body>
+  <a href="tutorial.html" class="back-button">
+    <span class="arrow-icon">&#8592;</span>Back
+  </a>
+
+  <div class="container">
+    <nav id="header">
+      <div class="nav-logo">
+        <p class="nav-name">Geolocation API</p>
+        <span>.</span>
       </div>
+    </nav>
+    <br><br><br>
+
+    <main>
+      <section id="tutorials">
+        <div class="top-header">
+          <h1>Tutorial: Geolocation API Basics</h1>
+        </div>
+        <div class="tutorial-box scrollable-box">
+          <h2>Tutorial Menggunakan Geolocation API</h2>
+          <p>HTML5 Geolocation API memungkinkan aplikasi untuk mengakses lokasi pengguna.</p>
+          <br>
+          <h3>Code:</h3>
+          <textarea class="editor" id="contentCode">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation API</title>
+</head>
+<body>
+  <div class="container_loc">
+    <h1>Get User Location with Geolocation API</h1>
+    <button onclick="getLocation()">Get Location</button>
+    <div id="location">
+      <h3>Your Location:</h3>
+      <p>Latitude: <span id="latitude"></span></p>
+      <p>Longitude: <span id="longitude"></span></p>
+      <p>Accuracy: <span id="accuracy"></span> meters</p>
     </div>
+  </div>
 
-    <script>
-      // Function to get user location
-      function getLocation() {
-        const locationBox = document.getElementById("location");
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
-
-        // Add loading effect to the button
-        const button = document.querySelector("button");
-        button.innerHTML = "Getting Location...";
-        button.disabled = true;
-        button.style.backgroundColor = "#ccc";
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
       }
+    }
 
-      // Function to display position
-      function showPosition(position) {
-        document.getElementById("latitude").innerHTML =
-          position.coords.latitude;
-        document.getElementById("longitude").innerHTML =
-          position.coords.longitude;
-        document.getElementById("accuracy").innerHTML =
-          position.coords.accuracy + " meters";
+    function showPosition(position) {
+      document.getElementById("latitude").innerText = position.coords.latitude;
+      document.getElementById("longitude").innerText = position.coords.longitude;
+      document.getElementById("accuracy").innerText = position.coords.accuracy;
+      document.getElementById("location").style.display = "block";
+    }
 
-        // Show the location div
-        const locationBox = document.getElementById("location");
-        locationBox.style.display = "block";
-
-        // Revert button state
-        const button = document.querySelector("button");
-        button.innerHTML = "Get Location";
-        button.disabled = false;
-        button.style.backgroundColor = "#007bff";
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
       }
+    }
+  </script>
+</body>
+</html>
+          </textarea>
+          <button class="run-button" onclick="runContentCode()">Run</button>
+          <button class="undo-button" onclick="undoContentCode()">Undo</button>
 
-      // Function to handle errors
-      function showError(error) {
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            alert("User denied the request for Geolocation.");
-            break;
-          case error.POSITION_UNAVAILABLE:
-            alert("Location information is unavailable.");
-            break;
-          case error.TIMEOUT:
-            alert("The request to get user location timed out.");
-            break;
-          case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.");
-            break;
-        }
+          <h3>Hasil:</h3>
+          <div class="preview" id="previewContent"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script>
+    let contentCodeHistory = [];
 
-        // Revert button state even in case of an error
-        const button = document.querySelector("button");
-        button.innerHTML = "Get Location";
-        button.disabled = false;
-        button.style.backgroundColor = "#007bff";
+    function runContentCode() {
+      const code = document.getElementById("contentCode").value;
+      document.getElementById("previewContent").innerHTML = code;
+      contentCodeHistory.push(code);
+    }
+
+    function undoContentCode() {
+      if (contentCodeHistory.length > 1) {
+        contentCodeHistory.pop();
+        const previousCode = contentCodeHistory[contentCodeHistory.length - 1];
+        document.getElementById("contentCode").value = previousCode;
+        document.getElementById("previewContent").innerHTML = previousCode;
+      } else {
+        document.getElementById("previewContent").innerHTML = "";
+        document.getElementById("contentCode").value = "";
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>

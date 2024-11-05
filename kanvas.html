@@ -1,19 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Tutorial Membuat Canvas</title>
+    <style>
+/* BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: var(--body-color); /* Use the same body color variable */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+nav#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 5px 10px var(--first-shadow-color); /* Use the same shadow variable */
+    z-index: 1000;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: var(--color-white); /* Use the same background color */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--first-shadow-color); /* Use the same shadow variable */
+    margin-top: 80px;
+    position: relative;
+}
+
+h2 {
+    text-align: center;
+    color: var(--text-color-second); /* Use the same text color variable */
+    margin-bottom: 20px;
+}
+
+.scrollable-box {
+    max-height: 400px;
+    overflow-y: scroll;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--color-white); /* Use the same background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-top: 20px;
+}
+
+textarea.editor {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-family: monospace;
+    height: 200px;
+}
+
+.run-button, .undo-button, .try-button {
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: var(--third-color); /* Use the same button color */
+    color: var(--color-white); /* Use the same text color */
+    font-weight: 600;
+    transition: background 0.3s;
+    border: none; /* Remove default border */
+}
+
+.run-button:hover, .undo-button:hover {
+    background-color: var(--second-color); /* Use the same hover color */
+}
+
+.preview {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--color-white); /* Use the same background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Style */
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--third-color); /* Use the same button color */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--color-white); /* Use the same text color */
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+    position: fixed; /* Fixed positioning */
+    top: 50px; /* Below navbar */
+    right: 135px;
+    z-index: 1100; /* Higher z-index than navbar */
+}
+
+.back-button:hover {
+    background: var(--second-color); /* Use the same hover color */
+}
+
+.arrow-icon {
+    margin-right: 5px;
+}
+    </style>
+</head>
+<body>
+    <a href="tutorial.html" class="back-button">
+        <span class="arrow-icon">&#8592;</span>Back</a>
+
+    <div class="container">
+        <nav id="header">
+            <div class="nav-logo">
+                <p class="nav-name">Canvas Tutorial</p>
+                <span>.</span>
+            </div>
+        </nav>
+        <br><br><br>
+
+        <main>
+            <section id="tutorials">
+                <div class="top-header">
+                    <h1>Tutorial: Canvas Basics</h1>
+                </div>
+                <div class="tutorial-box scrollable-box">
+                    <h2>Tutorial Membuat Canvas</h2>
+                    <p>Tutorial ini bertujuan untuk membantu Anda memahami cara menggunakan elemen canvas dalam HTML5.
+                      Anda akan belajar bagaimana menggambar gambar dan objek pada canvas, serta menambahkan interaksi menggunakan JavaScript.
+                    </p>
+                    <br>
+                    <h3>Code:</h3>
+                    <textarea class="editor" id="contentCode" placeholder="Masukkan kode HTML dan CSS di sini">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Membuat Canvas</title>
+</head>
 <body>
     <p>Pilih gambar:</p>
-<img id="gambar" src="assets/images/pp-min.jpeg" alt="" width="220" height="277">
-<p>Mengisi :</p>
-<canvas id="kanvas" width="220" height="277" style="border:1px solid #d3d3d3;">
-    Your browser does not support the HTML5 canvas tag.</canvas>
-<p><button onclick="kanvas()">Try it</button></p>
-<script>
-function kanvas(){
-var c = document.getElementById("kanvas");
-var ctx = c.getContext("2d");
-var img = document.getElementById("gambar");
-ctx.drawImage(img,0, 0, c.width, c.height);
-}
-</script>
+    <img id="gambar" src="assets/images/wonderfulindonesia.jpeg" alt="" width="220" height="277">
+    <p>Mengisi :</p>
+    <canvas id="kanvas" width="220" height="277" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <p><button class="try-button" onclick="kanvas()">Try it</button></p>
+</body>
+</html>
+                    </textarea>
+                    <button class="run-button" onclick="runContentCode()">Run</button>
+                    <button class="undo-button" onclick="undoContentCode()">Undo</button>
+
+                    <h3>Hasil:</h3>
+                    <div class="preview" id="previewContent"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        function kanvas() {
+            var c = document.getElementById("kanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("gambar");
+            ctx.clearRect(0, 0, c.width, c.height); // Clear the canvas before drawing
+            ctx.drawImage(img, 0, 0, c.width, c.height);
+        }
+
+        let contentCodeHistory = [];
+
+        function runContentCode() {
+            const code = document.getElementById("contentCode").value;
+            document.getElementById("previewContent").innerHTML = code;
+            contentCodeHistory.push(code);
+        }
+
+        function undoContentCode() {
+            if (contentCodeHistory.length > 1) {
+                contentCodeHistory.pop();
+                const previousCode = contentCodeHistory[contentCodeHistory.length - 1];
+                document.getElementById("contentCode").value = previousCode;
+                document.getElementById("previewContent").innerHTML = previousCode;
+            } else {
+                document.getElementById("previewContent").innerHTML = "";
+                document.getElementById("contentCode").value = "";
+            }
+        }
+    </script>
 </body>
 </html>

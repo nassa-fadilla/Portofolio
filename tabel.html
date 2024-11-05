@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Tutorial Membuat Tabel di HTML</title>
     <style>
+        /* BASE */
         * {
             margin: 0;
             padding: 0;
@@ -14,18 +15,38 @@
         }
 
         body {
-            background: var(--body-color);
-            padding: 20px;
-            padding-top: 80px; /* Tambahkan padding-top untuk memberi ruang pada konten agar tidak tertutup navbar */
+            background-color: var(--body-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
         }
 
         nav#header {
-            position: fixed; /* Navbar tetap berada di atas */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             box-shadow: 0 5px 10px var(--first-shadow-color);
             z-index: 1000;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--color-white);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--first-shadow-color);
+            margin-top: 80px;
+            position: relative;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--text-color-second);
+            margin-bottom: 20px; /* Jarak antara header dan konten berikutnya */
         }
 
         table {
@@ -50,118 +71,111 @@
             font-weight: 600;
         }
 
-        td {
-            background-color: var(--color-white);
-        }
-
-        h2 {
-            color: var(--text-color-second);
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-family: Poppins, sans-serif;
-            color: var(--text-color-second);
-            margin-bottom: 20px;
-        }
-
-        /* Scrollable box for tutorial section */
         .scrollable-box {
-            max-height: 300px; /* Atur tinggi maksimum */
-            overflow-y: scroll; /* Aktifkan scroll secara vertikal */
+            max-height: 400px;
+            overflow-y: scroll;
             padding: 15px;
-            border: 1px solid var(--second-color);
+            border: 1px solid #ccc;
             border-radius: 8px;
             background-color: var(--color-white);
-            box-shadow: 0 5px 10px var(--first-shadow-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Button Style */
+        .back-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--third-color);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            position: fixed; /* Mengubah menjadi fixed */
+            top: 50px; /* Menempatkan button di bawah navbar */
+            right: 135px;
+            z-index: 1100; /* Memberikan z-index lebih tinggi dari navbar */
+        }
+
+        .back-button:hover {
+            background: var(--second-color);
+        }
+
+        .arrow-icon {
+            margin-right: 5px;
+        }
+
+        /* Custom button for run and undo */
+        .run-button, .undo-button {
+            padding: 8px;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: var(--third-color);
+            color: var(--color-white);
+            font-weight: 600;
+            transition: background 0.3s;
+            border: none; /* Menghilangkan border hitam */
+        }
+
+        .run-button:hover, .undo-button:hover {
+            background-color: var(--second-color);
+        }
+
+        .editor {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            height: 200px;
         }
     </style>
 </head>
 <body>
-    <!-- --------------- HEADER --------------- -->
-    <nav id="header">
-        <div class="nav-logo">
-          <p class="nav-name">Tutorial</p>
-          <span>.</span>
-        </div>
-        <div class="nav-menu" id="myNavMenu">
-          <ul class="nav_menu_list">
-            <li class="nav_list">
-              <a href="#home" class="nav-link">Home</a>
-              <div class="circle"></div>
-            </li>
-            <li class="nav_list">
-              <a href="#about" class="nav-link">About</a>
-              <div class="circle"></div>
-            </li>
-            <li class="nav_list">
-              <a href="#projects" class="nav-link">Projects</a>
-              <div class="circle"></div>
-            </li>
-            <li class="nav_list">
-              <a href="tutorial.html" class="nav-link active-link">Tutorial</a>
-              <div class="circle"></div>
-            </li>
-            <li class="nav_list">
-              <a href="#contact" class="nav-link">Contact</a>
-              <div class="circle"></div>
-            </li>
-          </ul>
-        </div>
-        <div class="nav-button">
-          <a href="assets/CV_Nassa Fadilla.pdf" download="CV_Nassa Fadilla.pdf" class="btn">
-            Download CV <i class="uil uil-file-alt"></i>
-          </button>
-          </a>
-        </div>
-        <div class="nav-menu-btn">
-          <i class="uil uil-bars" onclick="myMenuFunction()"></i>
-        </div>
-      </nav>
-      <br></br>
+    <!-- Tombol Kembali ke Menu Tutorial -->
+    <a href="tutorial.html" class="back-button">
+        <span class="arrow-icon">&#8592;</span>Back</a>
 
-    <!-- Scrollable Tutorial Section -->
-    <div class="scrollable-box">
-        <h2>Tutorial Membuat Tabel di HTML</h2>
-        <p>Di bawah ini adalah langkah-langkah membuat tabel sederhana dalam HTML:</p>
+    <div class="container">
+        <nav id="header">
+            <div class="nav-logo">
+                <p class="nav-name">Table Tutorial</p>
+                <span>.</span>
+            </div>
+        </nav>
+        <br><br><br>
 
-        <h3>1. Buat Elemen &lt;table&gt;</h3>
-        <p>Langkah pertama dalam membuat tabel adalah dengan membuat elemen &lt;table&gt; sebagai container utama untuk tabel.</p>
-        <pre>
-&lt;table&gt;
-  <!-- Isi tabel akan ditempatkan di sini -->
-&lt;/table&gt;
-        </pre>
-
-        <h3>2. Membuat Bagian Header Tabel dengan &lt;thead&gt; dan &lt;th&gt;</h3>
-        <p>Bagian header digunakan untuk memberi judul setiap kolom. Header ini dibuat menggunakan elemen &lt;thead&gt;, dan setiap judul kolom dibuat menggunakan &lt;th&gt;.</p>
-        <pre>
-&lt;thead&gt;
-  &lt;tr&gt;
-    &lt;th&gt;NIM&lt;/th&gt;
-    &lt;th&gt;Nama&lt;/th&gt;
-    &lt;th&gt;IPK Sem-1&lt;/th&gt;
-    &lt;!-- Tambahkan kolom lainnya --&gt;
-  &lt;/tr&gt;
-&lt;/thead&gt;
-        </pre>
-
-        <h3>3. Menambahkan Isi Tabel dengan &lt;tbody&gt; dan &lt;td&gt;</h3>
-        <p>Isi tabel ditempatkan di dalam elemen &lt;tbody&gt;, dan setiap data diletakkan dalam baris &lt;tr&gt;. Setiap sel data di dalam baris ditulis menggunakan elemen &lt;td&gt;.</p>
-        <pre>
-&lt;tbody&gt;
-  &lt;tr&gt;
-    &lt;td&gt;5220311004&lt;/td&gt;
-    &lt;td&gt;Mia Anggreini&lt;/td&gt;
-    &lt;td&gt;4.00&lt;/td&gt;
-    &lt;!-- Tambahkan data lainnya --&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-        </pre>
-    </div>
-
-    <!-- Displaying the Table Result -->
-    <h2>Hasil Akhir Tabel</h2>
+        <main>
+            <section id="tutorials">
+                <div class="top-header">
+                    <h1>Tutorial: Table Basics</h1>
+                </div>
+                <div class="tutorial-box scrollable-box">
+                    <h2>Tutorial Membuat Tabel</h2>
+                    <p>Tutorial ini bertujuan untuk membantu Anda memahami dasar-dasar pembuatan tabel sederhana menggunakan HTML dan CSS.
+                      Anda akan belajar bagaimana menstrukturkan data dalam bentuk tabel yang rapi dan terorganisir,
+                      serta menambahkan elemen desain untuk memperindah tampilan tabel agar lebih menarik dan mudah dibaca.
+                      Langkah-langkah ini mencakup pemformatan baris, kolom, penambahan warna, hingga pengaturan gaya teks,
+                      yang merupakan keterampilan penting dalam mengembangkan antarmuka web.</p>
+                    <br>
+                    <h3>Code:</h3>
+                    <textarea class="editor" id="contentCode" placeholder="Masukkan kode HTML dan CSS di sini">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Membuat Tabel</title>
+<body>
+    <h2>Tampilan Tabel</h2>
     <table>
         <thead>
             <tr>
@@ -194,77 +208,82 @@
                 <td>Psikologi</td>
                 <td>Humaniora</td>
             </tr>
-            <tr>
-                <td>5220311010</td>
-                <td>Herman Prakoso</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>3.77</td>
-                <td>3.63</td>
-                <td>3.84</td>
-                <td>3.90</td>
-                <td>4.00</td>
-                <td>Bimbingan & Konseling</td>
-                <td>Pendidikan</td>
-            </tr>
-            <tr>
-                <td>5220311017</td>
-                <td>Fitrah Handayani</td>
-                <td>3.65</td>
-                <td>3.83</td>
-                <td>3.92</td>
-                <td>3.75</td>
-                <td>3.80</td>
-                <td>4.00</td>
-                <td>3.97</td>
-                <td>4.00</td>
-                <td>Hubungan Internasional</td>
-                <td>Humaniora</td>
-            </tr>
-            <tr>
-                <td>5220311020</td>
-                <td>Sandi Putra Pratama</td>
-                <td>3.80</td>
-                <td>3.73</td>
-                <td>3.88</td>
-                <td>3.91</td>
-                <td>3.66</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>Manajemen</td>
-                <td>Ekonomi & Bisnis</td>
-            </tr>
-            <tr>
-                <td>5220311022</td>
-                <td>Nassa Fadilla</td>
-                <td>3.85</td>
-                <td>3.90</td>
-                <td>3.77</td>
-                <td>3.93</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>Sistem Informasi</td>
-                <td>Sains & Teknologi</td>
-            </tr>
-            <tr>
-                <td>5220311034</td>
-                <td>Yesty Anggela</td>
-                <td>3.90</td>
-                <td>3.76</td>
-                <td>3.81</td>
-                <td>4.00</td>
-                <td>3.98</td>
-                <td>3.90</td>
-                <td>4.00</td>
-                <td>4.00</td>
-                <td>Teknik Informatika</td>
-                <td>Sains & Teknologi</td>
-            </tr>
+          <tr>
+              <td>5220311017</td>
+              <td>Fitrah Handayani</td>
+              <td>3.65</td>
+              <td>3.83</td>
+              <td>3.92</td>
+              <td>3.75</td>
+              <td>3.80</td>
+              <td>4.00</td>
+              <td>3.97</td>
+              <td>4.00</td>
+              <td>Hubungan Internasional</td>
+              <td>Humaniora</td>
+          </tr>
+          <tr>
+              <td>5220311022</td>
+              <td>Nassa Fadilla</td>
+              <td>3.85</td>
+              <td>3.90</td>
+              <td>3.77</td>
+              <td>3.93</td>
+              <td>4.00</td>
+              <td>4.00</td>
+              <td>4.00</td>
+              <td>4.00</td>
+              <td>Sistem Informasi</td>
+              <td>Sains & Teknologi</td>
+          </tr>
+          <tr>
+              <td>5220311034</td>
+              <td>Yesty Anggela</td>
+              <td>3.90</td>
+              <td>3.76</td>
+              <td>3.81</td>
+              <td>4.00</td>
+              <td>3.98</td>
+              <td>3.90</td>
+              <td>4.00</td>
+              <td>4.00</td>
+              <td>Teknik Informatika</td>
+              <td>Sains & Teknologi</td>
+          </tr>
         </tbody>
     </table>
+</body>
+</html>
+    </textarea>                    
+                    <button class="run-button" onclick="runContentCode()">Run</button>
+                    <button class="undo-button" onclick="undoContentCode()">Undo</button>
+                    
+                    <h3>Hasil:</h3>
+                    <div class="preview" id="previewContent"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        let contentCodeHistory = [];
+
+        function runContentCode() {
+            const code = document.getElementById("contentCode").value;
+            document.getElementById("previewContent").innerHTML = code;
+            contentCodeHistory.push(code);
+        }
+
+        function undoContentCode() {
+            if (contentCodeHistory.length > 1) {
+                contentCodeHistory.pop();
+                const previousCode = contentCodeHistory[contentCodeHistory.length - 1];
+                document.getElementById("contentCode").value = previousCode;
+                document.getElementById("previewContent").innerHTML = previousCode;
+            } else {
+                document.getElementById("previewContent").innerHTML = "";
+                document.getElementById("contentCode").value = "";
+            }
+        }
+    </script>
 </body>
 </html>
